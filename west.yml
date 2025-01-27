@@ -1,0 +1,26 @@
+# Copyright (c) 2021 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+manifest:
+  remotes:
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
+    - name: lordsboards
+      url-base: https://github.com/LordsBoards
+
+  projects:
+    - name: zephyr
+      remote: zephyrproject-rtos
+      revision: main
+      import:
+        name-allowlist:
+          - cmsis
+          - hal_nordic
+          - mcuboot
+    - name: royalblue-nrf54l15-zephyr-boards
+      remote: lordsboards
+      repo-path: RoyalBlue-nRF54L15-Zephyr-Boards
+      path: modules/boards/royalblue-nrf54l15-zephyr-boards
+      revision: main
+
+
