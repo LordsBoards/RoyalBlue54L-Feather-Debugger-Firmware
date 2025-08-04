@@ -1,0 +1,6 @@
+board:
+  name: royalblue54l_debugger 
+  full_name: RoyalBlue54L Debugger
+  vendor: lordsboards 
+  socs:
+  - name: nrf52833

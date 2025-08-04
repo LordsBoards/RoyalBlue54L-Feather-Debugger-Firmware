@@ -1,0 +1,24 @@
+/*
+ * Copyright (c) 2024 Lord's Boards LLC
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+&pinctrl {
+	uart0_default: uart0_default {
+		group1 {
+			psels = <NRF_PSEL(UART_TX, 0, 30)>;
+		};
+		group2 {
+			psels = <NRF_PSEL(UART_RX, 0, 31)>;
+			bias-pull-up;
+		};
+	};
+
+	uart0_sleep: uart0_sleep {
+		group1 {
+			psels = <NRF_PSEL(UART_TX, 0, 30)>,
+				<NRF_PSEL(UART_RX, 0, 31)>;
+			low-power-enable;
+		};
+	};
+};

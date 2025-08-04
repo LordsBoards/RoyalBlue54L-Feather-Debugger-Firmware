@@ -19,10 +19,10 @@
 LOG_MODULE_REGISTER(dap_sample, LOG_LEVEL_INF);
 
 NET_BUF_POOL_FIXED_DEFINE(dapusb_rx_pool, CONFIG_CMSIS_DAP_PACKET_COUNT,
-			  CONFIG_CMSIS_DAP_PACKET_SIZE, 0, NULL);
+			  64, 0, NULL);
 
-static uint8_t rx_buf[CONFIG_CMSIS_DAP_PACKET_SIZE];
-static uint8_t tx_buf[CONFIG_CMSIS_DAP_PACKET_SIZE];
+static uint8_t rx_buf[64];
+static uint8_t tx_buf[64];
 
 static K_FIFO_DEFINE(dap_rx_queue);
 
@@ -227,7 +227,7 @@ USBD_CLASS_DESCR_DEFINE(primary, 0) struct {
 		.bDescriptorType = USB_DESC_ENDPOINT,
 		.bEndpointAddress = DAP_USB_EP_OUT,
 		.bmAttributes = USB_DC_EP_BULK,
-		.wMaxPacketSize = sys_cpu_to_le16(CONFIG_CMSIS_DAP_PACKET_SIZE),
+		.wMaxPacketSize = sys_cpu_to_le16(64),
 		.bInterval = 0,
 	},
 	.if0_in_ep = {
@@ -235,7 +235,7 @@ USBD_CLASS_DESCR_DEFINE(primary, 0) struct {
 		.bDescriptorType = USB_DESC_ENDPOINT,
 		.bEndpointAddress = DAP_USB_EP_IN,
 		.bmAttributes = USB_DC_EP_BULK,
-		.wMaxPacketSize = sys_cpu_to_le16(CONFIG_CMSIS_DAP_PACKET_SIZE),
+		.wMaxPacketSize = sys_cpu_to_le16(64),
 		.bInterval = 0,
 	},
 };
@@ -270,7 +270,7 @@ static void dapusb_read_cb(uint8_t ep, int size, void *priv)
 	}
 
 	buf = net_buf_alloc(&dapusb_rx_pool, K_FOREVER);
-	net_buf_add_mem(buf, rx_buf, MIN(size, CONFIG_CMSIS_DAP_PACKET_SIZE));
+	net_buf_add_mem(buf, rx_buf, MIN(size, 64));
 	k_fifo_put(&dap_rx_queue, buf);
 
 read_cb_done:

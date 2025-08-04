@@ -1,0 +1,11 @@
+board:
+  name: royalblue54l 
+  full_name: RoyalBlue54L 
+  vendor: lordsboards 
+  socs:
+  - name: nrf54l15
+    variants:
+    - name: xip
+      cpucluster: cpuflpr
+    - name: ns
+      cpucluster: cpuapp

@@ -1,0 +1,11 @@
+# RoyalBlue54L Debugger nRF52833 board configuration
+
+# Copyright (c) 2024 Lord's Boards LLC
+# SPDX-License-Identifier: Apache-2.0
+
+if BOARD_ROYALBLUE54L_DEBUGGER
+
+config BT_CTLR
+	default BT
+
+endif # BOARD_ROYALBLUE54L_DEBUGGER
